@@ -54,7 +54,7 @@ def main():
     # dataset path 
     dataset = "../dataset/vpn"
     embedding = 'random'
-    model_name = 'FastText' 
+    model_name = 'FastTraffic' 
   
 
     x = import_module('models.' + model_name)
