@@ -1,4 +1,24 @@
 # FastTraffic
-The repository of FastTraffic, a lightweight encrypted network traffic classification DL model.
+The repository of FastTraffic, code for our Computer Networks Journal paper: FastTraffic: A lightweight method for encrypted traffic fast classification
 
-To speed up processing, we set an IP packet as the granularity of FastTraffic, truncate the informative parts in packets as inputs, and utilize a **text-like packet tokenization** method. For a lightweight and effective model, we propose an **N-gram feature embedding method** to represent structured and sequential features of packets and design a three-layer MLP to complete fast classification. 
+
+## Dependencies
+- Python 3.7
+- PyTorch 1.4.0
+
+## Usage 
+
+## Please quote if it helps you
+> @article{xu2023fasttraffic,
+  title={FastTraffic: A lightweight method for encrypted traffic fast classification},
+  author={Xu, Yuwei and Cao, Jie and Song, Kehui and Xiang, Qiao and Cheng, Guang},
+  journal={Computer Networks},
+  volume={235},
+  pages={109965},
+  year={2023},
+  publisher={Elsevier}
+}
+
+
+
+
