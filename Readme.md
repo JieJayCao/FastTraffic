@@ -6,6 +6,15 @@ The repository of FastTraffic, code for our Computer Networks Journal paper: Fas
 - Python 3.7
 - PyTorch 1.4.0
 
+## Dataset
+- [ISCX-VPN](https://www.unb.ca/cic/datasets/vpn.html)
+- [ISCX-Tor](https://www.unb.ca/cic/datasets/tor.html)
+- [USTC-TFC](https://github.com/yungshenglu/USTC-TFC2016)
+  
+## Traffic preprocessing
+- Preprocessing method proposed in [Deep Packet](https://github.com/munhouiani/Deep-Packet)
+- python preprocess.py
+
 ## Usage 
 > Adjust **./dataset** to your data
 
