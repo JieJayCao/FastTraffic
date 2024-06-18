@@ -160,7 +160,7 @@ def transform_payload(path):
             
             
             if service_label is not None:
-                f_service.write(token+"\t"+str(service_label)+"\t"+str(header_length)+"\t"+raw_label+"\n")
+                f_service.write(token+"\t"+str(service_label)+"\n")
     
             else:
                 return
