@@ -1,5 +1,5 @@
 # FastTraffic
-The repository of FastTraffic, code for our Computer Networks Journal paper: FastTraffic: A lightweight method for encrypted traffic fast classification
+The repository of FastTraffic, code for our Computer Networks Journal paper: [**FastTraffic: A lightweight method for encrypted traffic fast classification**](https://www.sciencedirect.com/science/article/pii/S1389128623004103)
 
 
 ## Dependencies
