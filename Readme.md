@@ -1,6 +1,8 @@
 # FastTraffic
-The repository of FastTraffic, code for our Computer Networks Journal paper: [**FastTraffic: A lightweight method for encrypted traffic fast classification**](https://www.sciencedirect.com/science/article/pii/S1389128623004103)
+The repository of FastTraffic, code for our *Computer Networks* Journal paper: [**FastTraffic: A lightweight method for encrypted traffic fast classification**](https://www.sciencedirect.com/science/article/pii/S1389128623004103)
 
+**Note:**
+- ⭐ **Please leave a <font color='orange'>STAR</font> if you like this work!** ⭐
 
 ## Dependencies
 - Python 3.7
