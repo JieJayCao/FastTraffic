@@ -7,38 +7,32 @@ from torchstat import stat
 
 class Config(object):
 
-    """配置参数"""
     def __init__(self, dataset, embedding):
         self.model_name = 'FastTraffic'
-        self.train_path = dataset + '/data/train.txt'                                # 训练集
-        self.dev_path = dataset + '/data/dev.txt'                                    # 验证集
-        self.test_path = dataset + '/data/test.txt'                                  # 测试集
+        self.train_path = dataset + '/data/train.txt'                                
+        self.dev_path = dataset + '/data/dev.txt'                                    
+        self.test_path = dataset + '/data/test.txt'                                 
         #self.test_path = dataset + '/data/tsne.txt'
         self.class_list = [x.strip() for x in open(
-            dataset + '/data/class.txt', encoding='utf-8').readlines()]              # 类别名单
-        self.vocab_path = dataset + '/data/vocab.pkl'                                # 词表
-        self.save_path = dataset + '/saved_dict/' + self.model_name + '.ckpt'        # 模型训练结果
+            dataset + '/data/class.txt', encoding='utf-8').readlines()]              
+        self.vocab_path = dataset + '/data/vocab.pkl'                                
+        self.save_path = dataset + '/saved_dict/' + self.model_name + '.ckpt'        
         self.log_path = dataset + '/log/' + self.model_name
-        self.embedding_pretrained = torch.tensor(
-            np.load(dataset + '/data/' + embedding)["embeddings"].astype('float32'))\
-            if embedding != 'random' else None                                       # 预训练词向量
-        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')   # 设备
-
-        self.dropout = 0.4                                             # 随机失活
-        self.require_improvement = 200000                                 # 若超过1000batch效果还没提升，则提前结束训练
-        self.num_classes = len(self.class_list)                         # 类别数
-        self.n_vocab = 0                                                # 词表大小，在运行时赋值
-        self.num_epochs = 10                                            # epoch数
-        self.batch_size = 256
-        #204                                         # mini-batch大小
-        self.pad_size = 50                                           # 每句话处理成的长度(短填长切)
-        self.learning_rate = 0.0029                                     # 学习率
-        self.embed = 40        # 字向量维度
-        self.hidden_size = 150                                         # 隐藏层大小
-        self.n_gram_vocab = 5000                                       # ngram 词表大小
-
+        self.embedding_pretrained = None                                       
+        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')  
+        self.dropout = 0.4                                            
+        self.require_improvement = 200000                               
+        self.num_classes = len(self.class_list)                         
+        self.n_vocab = 0                                               
+        self.num_epochs = 10                                            
+        self.batch_size = 204
+        self.pad_size = 50                                           
+        self.learning_rate = 0.0029                                     
+        self.embed = 40       
+        self.hidden_size = 150                                       
+        self.n_gram_vocab = 5000                                      
         self.save_res = dataset +"/"+ self.model_name +"_res.txt"
-'''Bag of Tricks for Efficient Text Classification'''
+
 
 
 class Model(nn.Module):
@@ -75,8 +69,8 @@ class Model(nn.Module):
         out = self.bn(out)
         out = F.gelu(out)
         out = self.dropout(out)
-         # TSNE get Embedding
         
+        # TSNE get Embedding
         """f = open("tsne_ustc.txt",'a')
         E_out = out[0].cpu()
         tsne = str(E_out.numpy().tolist()).strip("[").strip("]")
@@ -105,8 +99,5 @@ class Model(nn.Module):
     flops, params = profile(net, inputs=(inputs,),verbose=False)
     flops, params = clever_format([flops, params], "%.3f")
     with torch.autograd.profiler.profile(use_cuda=True) as prof:
-    # 运行你的模型
         output = net(inputs)
-
-# 打印 FLOPs
         print(prof.key_averages().table(sort_by="self_cpu_time_total"))"""
