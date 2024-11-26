@@ -8,8 +8,8 @@ import time
 from datetime import timedelta
 
 
-MAX_VOCAB_SIZE = 10000
-UNK, PAD = '<UNK>', '<PAD>'
+MaxLength = 10000
+
 
 
 def build_vocab(file_path, tokenizer, max_size, min_freq):
@@ -37,20 +37,9 @@ def build_dataset(config, ues_word):
     if os.path.exists(config.vocab_path):
         vocab = pkl.load(open(config.vocab_path, 'rb'))
     else:
-        vocab = build_vocab(config.train_path, tokenizer=tokenizer, max_size=MAX_VOCAB_SIZE, min_freq=1)
+        vocab = build_vocab(config.train_path, tokenizer=tokenizer, max_size=MaxLength, min_freq=1)
         pkl.dump(vocab, open(config.vocab_path, 'wb'))
         
-    print(f"Vocab size: {len(vocab)}")
-
-    def biGramHash(sequence, t, buckets):
-        t1 = sequence[t - 1] if t - 1 >= 0 else 0
-        
-        return (t1 * 14918087) % buckets
-
-    def triGramHash(sequence, t, buckets):
-        t1 = sequence[t - 1] if t - 1 >= 0 else 0
-        t2 = sequence[t - 2] if t - 2 >= 0 else 0
-        return (t2 * 14918087 * 18408749 + t1 * 14918087) % buckets
 
 
     def biGramHash_new(sequence, i, buckets):
@@ -64,7 +53,7 @@ def build_dataset(config, ues_word):
         t2 = sequence[i + 2] 
         return (t1 * 14918087 + t*10003127 + t2 * 14918087 * 18408749) % buckets
 
-    def load_dataset(path, pad_size=32):
+    def load_dataset(path, pad_size):
         contents = []
         with open(path, 'r', encoding='UTF-8') as f:
             for line in tqdm(f):
@@ -75,12 +64,6 @@ def build_dataset(config, ues_word):
                 words_line = []
                 token = tokenizer(content)
                 seq_len = len(token)
-                if pad_size:
-                    if len(token) < pad_size:
-                        token.extend([PAD] * (pad_size - len(token)))
-                    else:
-                        token = token[:pad_size]
-                        seq_len = pad_size
                 # word to id
                 for word in token:
                     #print(vocab.get(word, vocab.get(UNK)))
