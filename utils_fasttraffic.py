@@ -31,9 +31,9 @@ def build_vocab(file_path, tokenizer, max_size, min_freq):
 
 def build_dataset(config, ues_word):
     if ues_word:
-        tokenizer = lambda x: x.split(' ')  # 以空格隔开，word-level
+        tokenizer = lambda x: x.split(' ')  
     else:
-        tokenizer = lambda x: [y for y in x]  # char-level
+        tokenizer = lambda x: [y for y in x]  
     if os.path.exists(config.vocab_path):
         vocab = pkl.load(open(config.vocab_path, 'rb'))
     else:
