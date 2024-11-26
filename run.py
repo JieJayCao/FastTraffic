@@ -10,7 +10,7 @@ from thop import profile, clever_format
 import os
 from utils_fasttraffic import build_dataset, build_iterator, get_time_dif
 
-parser = argparse.ArgumentParser(description='Chinese Text Classification')
+parser = argparse.ArgumentParser(description='Encrypted Traffic Classification')
 args = parser.parse_args()
 
 
@@ -62,7 +62,7 @@ def main():
     np.random.seed(1)
     torch.manual_seed(1)
     torch.cuda.manual_seed_all(1)
-    torch.backends.cudnn.deterministic = True  # 保证每次结果一样
+    torch.backends.cudnn.deterministic = True 
     start_time = time.time()
     print("Loading data...")
     vocab, train_data, dev_data, test_data = build_dataset(config, True)
@@ -80,8 +80,6 @@ def main():
     print(model.parameters)
     print(get_parameter_number(model))
     train(config, model, train_iter, dev_iter, test_iter)
-
-    
     test(config,model,test_iter)
  
     
@@ -89,6 +87,5 @@ def main():
     
 if __name__ == '__main__':
     main()
-    #memory()
 
 
