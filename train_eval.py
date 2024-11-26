@@ -1,4 +1,7 @@
 # coding: UTF-8
+# Acknowledgements: 
+# This project is inspired by the FastText implementation from the repository: [Chinese-Text-Classification-Pytorch](https://github.com/649453932/Chinese-Text-Classification-Pytorch).
+
 from cgitb import text
 import numpy as np
 import torch
