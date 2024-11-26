@@ -10,7 +10,6 @@ from utils import get_time_dif
 
 
 
-# 权重初始化，默认xavier
 def init_network(model, method='xavier', exclude='embedding', seed=123):
     for name, w in model.named_parameters():
         if exclude not in name:
@@ -29,21 +28,19 @@ def init_network(model, method='xavier', exclude='embedding', seed=123):
 
 def train(config, model, train_iter, dev_iter, test_iter):
 
-
     start_time = time.time()
     model.train()
     optimizer = torch.optim.Adam(model.parameters(), lr=config.learning_rate)
 
-    # 学习率指数衰减，每次epoch：学习率 = gamma * 学习率
     # scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.9)
-    total_batch = 0  # 记录进行到多少batch
+    total_batch = 0  
     dev_best_loss = float('inf')
-    last_improve = 0  # 记录上次验证集loss下降的batch数
-    flag = False  # 记录是否很久没有效果提升
+    last_improve = 0  
+    flag = False 
 
     for epoch in range(config.num_epochs):
         print('Epoch [{}/{}]'.format(epoch + 1, config.num_epochs))
-        # scheduler.step() # 学习率衰减
+        # scheduler.step()
         for i, (trains, labels) in enumerate(train_iter):
             s = time.time()
             outputs = model(trains)
@@ -54,7 +51,6 @@ def train(config, model, train_iter, dev_iter, test_iter):
             e = time.time()
             #print(e-s)
             if total_batch % 200 == 0:
-                # 每多少轮输出在训练集和验证集上的效果
                 true = labels.data.cpu()
                 predic = torch.max(outputs.data, 1)[1].cpu()
                 train_acc = metrics.accuracy_score(true, predic)
@@ -74,7 +70,6 @@ def train(config, model, train_iter, dev_iter, test_iter):
 
             total_batch += 1
             if total_batch - last_improve > config.require_improvement:
-                # 验证集loss超过1000batch没下降，结束训练
                 print("No optimization for a long time, auto-stopping...")
                 flag = True
                 break
