@@ -103,15 +103,10 @@ class DatasetIterater(object):
         self.device = device
 
     def _to_tensor(self, datas):
-        # xx = [xxx[2] for xxx in datas]
-        # indexx = np.argsort(xx)[::-1]
-        # datas = np.array(datas)[indexx]
         x = torch.LongTensor([_[0] for _ in datas]).to(self.device)
         y = torch.LongTensor([_[1] for _ in datas]).to(self.device)
         bigram = torch.LongTensor([_[3] for _ in datas]).to(self.device)
         trigram = torch.LongTensor([_[4] for _ in datas]).to(self.device)
-
-        # pad前的长度(超过pad_size的设为pad_size)
         seq_len = torch.LongTensor([_[2] for _ in datas]).to(self.device)
         return (x, seq_len, bigram, trigram), y
 
@@ -147,7 +142,6 @@ def build_iterator(dataset, config):
 
 
 def get_time_dif(start_time):
-    """获取已使用时间"""
     end_time = time.time()
     time_dif = end_time - start_time
     return timedelta(seconds=int(round(time_dif)))
