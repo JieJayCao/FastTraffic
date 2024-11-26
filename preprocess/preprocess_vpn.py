@@ -108,15 +108,15 @@ def get_ip_and_transport_header_lengths(packet):
     ip_header_length = 0
     transport_header_length = 0
 
-    # 检查数据包是否包含 IP 层
+    # Check the IP layer
     if IP in packet:
-        ip_header_length = packet[IP].ihl * 4  # IP 首部长度（以字节为单位）
+        ip_header_length = packet[IP].ihl * 4 
 
-        # 检查数据包是否包含传输层（TCP 或 UDP）
+        # Check the TCP/UDP layer
         if TCP in packet:
-            transport_header_length = packet[TCP].dataofs * 4  # 传输层首部长度（以字节为单位）
+            transport_header_length = packet[TCP].dataofs * 4 
         elif UDP in packet:
-            transport_header_length = 20  # UDP 首部固定长度为 8 字节
+            transport_header_length = 20  
         
             
     return ip_header_length + transport_header_length
