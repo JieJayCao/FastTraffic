@@ -26,7 +26,8 @@ The repository of FastTraffic, code for our *Computer Networks* Journal paper: [
 - Provided in [ETC](https://github.com/JieJayCao/Encrypted-Traffic-Classification-Models).
 
 ## Please quote if it helps you
-> @article{xu2023fasttraffic,
+```bibtex
+@article{xu2023fasttraffic,
   title={FastTraffic: A lightweight method for encrypted traffic fast classification},
   author={Xu, Yuwei and Cao, Jie and Song, Kehui and Xiang, Qiao and Cheng, Guang},
   journal={Computer Networks},
