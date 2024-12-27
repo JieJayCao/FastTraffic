@@ -36,7 +36,3 @@ The repository of FastTraffic, code for our *Computer Networks* Journal paper: [
   year={2023},
   publisher={Elsevier}
 }
-
-
-
-
